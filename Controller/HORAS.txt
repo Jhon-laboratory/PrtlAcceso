@@ -1,0 +1,1 @@
+SELECT SUM(mt_horas) AS total,mt_id_equipo FROM mt_horas_trabajo WHERE mt_estatus='1' AND mt_fecha !=2023-03-28 GROUP BY mt_id_equipo

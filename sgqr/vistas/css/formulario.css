@@ -1,0 +1,116 @@
+.detalleotras{
+	display: none;
+}
+
+
+/*=============================================
+ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
+=============================================*/
+@media(min-width: 1400px){
+
+	
+}
+/*@media (min-width:1200px){
+
+
+}*/
+
+/*=============================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================*/
+
+@media (max-width:1199px) and (min-width:992px){
+	.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown){
+		padding-top: 3.99rem;
+	}
+	.date>.cont-fech{
+		width: 50%;
+	}
+	.container-form>.border{
+		width: 66.66666667%;
+	}	
+
+}
+
+/*=============================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+=============================================*/
+
+@media (max-width:991px) and (min-width:768px){
+	.logo{
+		width: 33.33333333%;
+	}
+	.titulo h1{
+		font-size: 26px;
+	}
+	.date label{
+		padding: 5px;
+	}	
+	.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown){
+		padding-top: 3.99rem;
+	}
+	.cont-fech{
+		width: 50%;
+		
+	}
+	.container-form>.border{
+		width: 83.33333333%;
+	}
+}
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width:767px){
+
+	.logo img{
+		width: 190px;
+	}
+	.titulo h1{
+		font-size: 36px;
+	}
+	.titulo h3{
+		font-size: 25px;
+	}
+	.msjbienvenida{
+		font-size: 12px;
+	}
+	.date{
+		display: block !important;
+	}
+	.date label{
+		padding: 5px;
+	}
+	.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown){
+		padding-top: 3.625rem;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
