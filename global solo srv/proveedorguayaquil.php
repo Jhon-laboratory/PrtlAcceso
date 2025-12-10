@@ -5,514 +5,347 @@ include('../../control_session.php');
 include('../menu.php');
 ?>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PORTAL DE ACCESO A TERCEROS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PORTAL DE ACCESO A TERCEROS</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-  <!-- BS Stepper -->
-  <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
-  <!-- dropzonejs -->
-  <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
-
-   <!-- SweetAlert2 -->
-   <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-
-
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../dist/css/uikit.css">
-
-<link rel="stylesheet" href="../../dist/css/bebasneue.css">
-  <link rel="stylesheet" href="../../css_session/Css.css">
+    <!-- Bootstrap -->
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="../../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="../../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="../../vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../../build/css/custom.min.css" rel="stylesheet">
+    
+    <!-- Estilos adicionales para compactar -->
+    <style>
+        /* CABECERA SUPERIOR MÁS COMPACTA */
+        .top_nav .navbar-right {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .top_nav .nav_menu {
+            min-height: 50px;
+        }
+        
+        .navbar-right li {
+            padding: 0 5px;
+        }
+        
+        .user-profile img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+        
+        .dropdown-toggle {
+            padding: 8px 10px !important;
+        }
+        
+        .dropdown-usermenu {
+            min-width: 180px;
+        }
+        
+        /* Ajustar el contenido principal */
+        .right_col {
+            padding: 10px !important;
+        }
+        
+        /* Reducir espacios en cards */
+        .card {
+            margin-bottom: 10px;
+        }
+        
+        .card-header {
+            padding: 8px 15px !important;
+        }
+        
+        .card-title {
+            font-size: 16px !important;
+            margin: 0 !important;
+        }
+        
+        /* Tabla más compacta */
+        .tabla_detalle_fp th, 
+        .tabla_detalle_fp td {
+            padding: 4px 6px !important;
+            font-size: 12px;
+        }
+        
+        /* Inputs más compactos */
+        .form-control {
+            padding: 4px 8px !important;
+            font-size: 13px;
+        }
+        
+        /* Botones más pequeños */
+        .btn {
+            padding: 4px 12px !important;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
-<body class="hold-transition sidebar-mini sidebar-collapse">
-<div id="mensaje2"></div>
-  <div class="wrapper">
-
-    <!--  SALIR DEL SISTEMA -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-user fa-fw"></i> <?php echo  $_SESSION["gb_nombre"]; ?> <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-
-            <li><a href="../../session_destroy.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <!-- FIN SALIR DEL SISTEMA -->
-
-    <!-- INICIO MENU -->
-    <aside class="main-sidebar sidebar-light-primary elevation-4">
-    <a href="" class="brand-link">
-          <img src="../../img/logo.png" style="width: 80%; height: 2%;margin-top: -4px" alt="RANSA">
-      </a>
-      <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image"  style="display: none;" >
-            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info"  style="display: none;">
-            <a href="#" class="d-block"><?php echo  $_SESSION["gb_nombre"]; ?></a>
-          </div>
-        </div>
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-            <?php
-            sistema_menu(6,48,1);
-            ?>
-
-
-
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </aside>
-    <!-- FIN MENU -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-      <!-- INFORMACION UBICACION SISTEMA-->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <!--<h1 class="m-0">Registro/consulta Productos</h1>
--->
-            </div>
-           <!-- <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-
-                <button type="button" class="pull-right btn btn-default" id="sendEmail">Logística
-                  <i class="fa fa-arrow-circle-right"></i>
-                </button>
-                <button type="button" class="pull-right btn btn-default" id="sendEmail">Clientes
-                  <i class="fa fa-arrow-circle-right"></i>
-              </ol>
-            </div>-->
-          </div>
-        </div>
-      </div>
-      <!-- FIN INFORMACION UBICACION SISTEMA-->
-
-
-      <!-- CONTENIDO PAGUINA PRINCIPAL -->
-
-      <div class="content">
-
-      
-        <div class="container-fluid">
-
-
-        <div class="card card-primary card-outline">
-        <div class="card-header">
-        <h3 class="card-title">
-                    <i class="fas fa-address-card"></i>
-                    Interfaz de Consulta
-                  </h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-          
-          </div>
-        </div>
-        <div class="card-body">
-        <div class="col-lg-2">
-
-        <!--
-          <button type="button" id="btn_actualizarproductos" onclick="registro_proceso()"  class="btn btn-outline-info btn-block btn-flat"><i class="fas fa-update"></i>Actualizar Productos</button>
--->
-</div>
-
-        <div class="row">
-            <div class="col-lg-3" style="display: none;">
-
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Carga de imagenes/fotos</h5>
-                </div>
-                <div class="card-body">
-                  <div class="col-lg-12">
-
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Código</strong><span style="color:#ff0000;">*</span></label>
-                        <input  readonly="true" disabled type="text" class="form-control" id="txt_identificacion" maxlength="20" autocomplete="off" onkeypress='return validaNumericos(event)' onChange="validar_identificacion(this.value)" />
-                      </div>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            
+            <!-- MENÚ LATERAL IZQUIERDO -->
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title">
+                            <img src="../../img/logo.png" alt="RANSA Logo" style="height: 40px;">
+                        </a>
                     </div>
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Nombre del Producto</strong><span style="color:#ff0000;">*</span></label>
-                        <input type="text"  readonly="true" disabled  class="form-control" id="txt_nombre" autocomplete="off" oninput="this.value = this.value.toUpperCase()" />
-                      </div>
-                    </div>
+                    <div class="clearfix"></div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Imagenes</strong>
-                        <input name="image" multiple id="image" type="file" accept="image/*" class="form-control" />  
-                      </div>
-                    </div>
-					
-					
-			<!--		<div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Ciudad</strong>
-                        <input type="text" class="form-control" id="txt_ciudad" autocomplete="off"  oninput="this.value = this.value.toUpperCase()"/>
-                      </div>
-                    </div>
--->
-					
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-
-                        <br>
-                        <div class="text-rihgt" id="create_cliente">
-                          
-                          <button type="button" id="btn_save_cliente"  class="btn btn-outline-info btn-block btn-flat"><i class="fas fa-save"></i> Cargar imagenes</button>
+                    <!-- PERFIL DEL USUARIO -->
+                    <div class="profile clearfix">
+                        <div class="profile_info">
+                            <span>Bienvenido,</span>
+                            <h2><?php echo $_SESSION["gb_nombre"]; ?></h2>
                         </div>
-
-                        <div class="text-rihgt" id="editar_cliente" style="display: none;">
-
-
-                          <button type="button" id="btn_editar_cliente"  class="btn btn-outline-info btn-block btn-flat"><i class="fas fa-edit"></i> Cargar imagenes</button>
-                        </div>
-
-
-                      </div>
                     </div>
-                  </div>
+                    <!-- /PERFIL DEL USUARIO -->
+
+                    <br />
+
+                    <!-- MENÚ GENERADO POR menu.php -->
+                    <?php sistema_menu(6,48,1); ?>
+                    <!-- /MENÚ -->
+
+                    <!-- BOTONES DEL FOOTER DEL MENÚ -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Configuración">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Pantalla Completa" onclick="toggleFullScreen()">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Recargar" onclick="location.reload()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Cerrar Sesión" href="../../session_destroy.php">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /BOTONES DEL FOOTER -->
                 </div>
-              </div>
             </div>
+            <!-- /MENÚ LATERAL IZQUIERDO -->
 
-
-            <div class="col-lg-12">
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Consulta</h5>
+            <!-- CABECERA SUPERIOR -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class="navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../../images/user.png" alt=""><?php echo $_SESSION["gb_nombre"]; ?>
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                    aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="../../session_destroy.php">
+                                        <i class="fa fa-sign-out pull-right"></i> Salir
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="card-body">
+            </div>
+            <!-- /CABECERA SUPERIOR -->
 
-
+            <!-- CONTENIDO PRINCIPAL -->
+            <div class="right_col" role="main" style="min-height: calc(100vh - 50px); padding: 10px;">
                 
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="table-responsive demo-x content">
-
-                        <div class="box-body">
-
-                          <table id="table_clientes" class="table table-bordered text-center tabla_detalle_fp">
-                            <thead>
-                              <tr>
-                              <th style="width:10px">#</th>
-                                <th style="width:20px">Nombre</th>
-                                <th style="width:10px">Cédula</th>
-                                <th style="width:10px">Documento<br>IESS</th>
-                                <th style="width:5px">Examen de Seguridad</th>
-                                <th style="width:3px">Antecedentes</th>
-                                <th style="width:10px">Razón Social</th>
-                                <th style="width:10px">Fecha Documento</th> <!--ANUAL X ACTIVO O CADUCADO-->
-                                <th style="width:10px">Fecha Capacitación</th> <!--ANUAL X ACTIVO O CADUCADO-->
-                                <th style="width:10px">Fecha Antecedentes Penales</th> <!--ANUAL X ACTIVO O CADUCADO-->
-                                <th style="width:10px">Comentario</th>
-                                <th style="width:10px">#Consulta</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
+                <!-- ENCABEZADO DEL CONTENIDO -->
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            <i class="fa fa-portal"></i> PORTAL DE ACCESO A TERCEROS
+                        </h3>
+                    </div>
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="buscador_global" 
+                                       placeholder="Buscar por nombre, cédula o razón social...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="btn_buscar" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                <!-- /ENCABEZADO DEL CONTENIDO -->
 
-
-
-          <div class="row" style="display: none;">
-            <div class="col-lg-4">
-
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Servicio Mensual</h5>
-                </div>
-                <div class="card-body">
-                  <div class="col-lg-12">
-
-
-
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>RUC</strong>
-                        <input type="text" class="form-control" id="txt_identificacion_s" autocomplete="off" maxlength="20" readonly="true"/>
-                      </div>
-                    </div>
-
-
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Nombre</strong>
-                        <input type="text" class="form-control" id="txt_cliente" autocomplete="off" readonly="true" oninput="this.value = this.value.toUpperCase()" />
-                      </div>
-                    </div>
-
-                  <!--<div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Servicio</strong><span style="color:#ff0000;">*</span>
-                        <select  id="txt_servicio" class="form-control"   style="width: 100%;" readonly="true" disabled>
-                        </select>
-                      </div>
-                  </div>
-                  
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Ciudad inicio</strong><span style="color:#ff0000;">*</span>
-                        <select  id="txt_ciudad_ini"  name="txt_ciudad_ini" class="form-control"   style="width: 100%;" >
-                        </select>
-                      </div>
-                  </div>
-				  
-				  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Zona</strong><span style="color:#ff0000;">*</span>
-                        <select  id="txt_zona"  name="txt_zona" class="form-control"   style="width: 100%;" >
-                        </select>
-                      </div>
-                  </div>
-				  
-				  <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Ciudad Fin</strong><span style="color:#ff0000;">*</span>
-                        <select  id="txt_ciudad_fin"  name="txt_ciudad_fin" class="form-control"   style="width: 100%;" >
-                        </select>
-                      </div>
-                  </div>
-
+                <!-- CONTENIDO PRINCIPAL -->
+                <div class="clearfix"></div>
                 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Unidad</strong><span style="color:#ff0000;">*</span>
-                        <select  id="txt_unidad" class="form-control select2bs4" style="width: 100%;" >
-                        </select>
-                        
-                      </div>
-                    </div>
--->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2><i class="fa fa-address-card"></i> Interfaz de Consulta</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                
+                                <!-- SECCIÓN DE CARGA DE IMÁGENES (OCULTA) -->
+                                <div class="row" style="display: none;">
+                                    <div class="col-md-3">
+                                        <div class="x_panel">
+                                            <div class="x_title">
+                                                <h5>Carga de imagenes/fotos</h5>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <!-- Formulario de imágenes -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Tipo de Honorario</strong><span style="color:#ff0000;">*</span>
-                        <input type="text" class="form-control" id="txt_descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()"  />
-                      </div>
-                    </div>
+                                <!-- TABLA DE PROVEEDORES -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="x_panel">
+                                            <div class="x_title">
+                                                <h5>Consulta de Proveedores</h5>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div class="table-responsive">
+                                                    <table id="table_clientes" class="table table-bordered table-striped tabla_detalle_fp">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Nombre</th>
+                                                                <th>Cédula</th>
+                                                                <th>Documento<br>IESS</th>
+                                                                <th>Examen de Seguridad</th>
+                                                                <th>Antecedentes</th>
+                                                                <th>Razón Social</th>
+                                                                <th>Fecha Documento</th>
+                                                                <th>Fecha Capacitación</th>
+                                                                <th>Fecha Antecedentes Penales</th>
+                                                                <th>Comentario</th>
+                                                                <th>#Consulta</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <strong>Precio</strong><span style="color:#ff0000;">*</span>
-                        <input type="text" class="form-control" id="txt_precio" autocomplete="off" onkeypress="return filterFloat(event,this);"  maxlength="10"/>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="form-group">
-                        <br>
-                        <div class="text-rihgt" id="create_servicio">
-                          
-                          <button type="button" id="btn_save_servico"  class="btn btn-outline-info btn-block btn-flat"><i class="fas fa-save"></i> Crear Honorario</button>
+                            </div>
                         </div>
-
-                        <div class="text-rihgt" id="editar_servico" style="display: none;">
-
-
-                          <button type="button" id="btn_editar_servicio"  class="btn btn-outline-info btn-block btn-flat"><i class="fas fa-edit"></i> Editar Honorario</button>
-                        </div>
-
-
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+
             </div>
+            <!-- /CONTENIDO PRINCIPAL -->
 
-
-            <div class="col-lg-8">
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Consulta de Honorarios</h5>
+            <!-- FOOTER -->
+            <footer>
+                <div class="pull-right">
+                    Copyright © <?php echo date('Y'); ?> PORTAL DE ACCESO A TERCEROS RANSA. All rights reserved.
                 </div>
-                <div class="card-body">
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /FOOTER -->
 
-
-                
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                      <div class="table-responsive demo-x content">
-
-                        <div class="box-body">
-
-                          <table id="table_servicios" class="table table-striped table-bordered text-center tabla_detalle_fp">
-                            <thead>
-                              <tr>
-                                <td style="width:10px">#</td>
-                                <td style="width:10px">Honorario</td>
-                                <!--<td style="width:10px">Detalle</td>
-                                <td style="width:10px">Unidad</td>
-                                <td style="width:10px">Descripción</td>-->
-                                <td style="width:10px">Precio</td>   
-                                <td style="width:80px"></td>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          
-        </div>
-        <!-- /.card-footer-->
-      </div>
-
-         
-        </div>
-      </div>
     </div>
-    <!-- FIN  CONTENIDO PAGUINA PRINCIPAL -->
 
-
-
-    <aside class="control-sidebar control-sidebar-dark">
-      <div class="p-3">
-        <h5>PORTAL ACCESO RANSA</h5>
-        <p>PORTAL ACCESO RANSA</p>
-      </div>
-    </aside>
-
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-inline">
-      PORTAL ACCESO RANSA 1.0
-      </div>
-      <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="#">PORTAL ACCESO RANSA</a>.</strong> All rights reserved.
-    </footer>
-  </div>
-  <!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
- <!-- REQUIRED SCRIPTS -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- SweetAlert2 -->
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-  <!-- Toastr -->
-  <script src="../../plugins/toastr/toastr.min.js"></script>
-
-  <!-- DataTables  & Plugins -->
-  <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  <script src="../../plugins/jszip/jszip.min.js"></script>
-  <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-  <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-  <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
-<!-- Bootstrap4 Duallistbox -->
-<script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
-<script src="../../plugins/moment/moment.min.js"></script>
-<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
-<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
-<script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
-<script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- BS-Stepper -->
-<script src="../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
-<script src="../../plugins/dropzone/min/dropzone.min.js"></script>
-
-
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-
-  <!-- AdminLTE PREDICTIVO -->
-  <script src="../../plugins/jquery-ui/jquery-ui.js" type="text/javascript"></script>
-
-  <script src="../funciones.js"></script>
-  <script src="./js/proveedorguayaquil.js"></script>
+    <!-- jQuery -->
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../vendors/nprogress/nprogress.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../../build/js/custom.min.js"></script>
+    <!-- Datatables -->
+    <script src="../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    
+    <script>
+        // Función para pantalla completa
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Buscador
+        $(document).ready(function() {
+            $('#buscador_global').keypress(function(e) {
+                if(e.which == 13) {
+                    buscarProveedores();
+                }
+            });
+            
+            $('#btn_buscar').click(function() {
+                buscarProveedores();
+            });
+            
+            function buscarProveedores() {
+                var termino = $('#buscador_global').val();
+                if (termino.length > 0) {
+                    // Implementar búsqueda aquí
+                    console.log('Buscando:', termino);
+                }
+            }
+        });
+    </script>
 </body>
-
 </html>
