@@ -96,7 +96,7 @@ $dato3 = 1;   // Origen
         .nav_menu .navbar-right a.user-profile:hover {
             background: rgba(40, 167, 69, 0.15);
             color: #20c997 !important;
-            border-color: rgba(32, 201, 151, 0.5);
+            border-color = rgba(32, 201, 151, 0.5);
         }
         
         /* Estilo para el dropdown */
@@ -194,7 +194,7 @@ $dato3 = 1;   // Origen
         }
 
         .card-header h5 i {
-            margin-right: 8px;
+            margin-right = 8px;
             font-size: 14px;
             color: rgba(255,255,255,0.9);
         }
@@ -534,12 +534,39 @@ $dato3 = 1;   // Origen
 
                     <br />
 
-                    <!-- MENÚ PRINCIPAL -->
+                    <!-- REEMPLAZA ESTA SECCIÓN DEL MENÚ -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Navegación Principal</h3>
                             <ul class="nav side-menu">
-                                <!-- Menú del sistema -->
+                                
+                                <!-- BOTÓN FIJO "PROVEEDORES" AL INICIO CON DOS OPCIONES -->
+                                <li class="active">
+                                  <a>
+                                    <i class="fa fa-truck"></i>
+                                    Proveedores
+                                    <span class="fa fa-chevron-up"></span>
+                                  </a>
+                                  <ul class="nav child_menu" style="display: block;">
+                                    <!-- OPCIÓN 1: PAGOS IESS -->
+                                    <li class="current-page">
+                                      <a href="proveedores.php">
+                                        <i class="fa fa-money"></i>
+                                        Pagos IESS
+                                      </a>
+                                    </li>
+                                    
+                                    <!-- OPCIÓN 2: DASHBOARD -->
+                                    <li>
+                                      <a href="proveedorquito.php">
+                                        <i class="fa fa-dashboard"></i>
+                                        Dashboard Proveedores
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                                
+                                <!-- MENÚ DINÁMICO DEL SISTEMA (Módulos de BD) -->
                                 <?php 
                                 include('../menu.php');
                                 sistema_menu($dato1, $dato2, $dato3); 
@@ -547,13 +574,15 @@ $dato3 = 1;   // Origen
                                 
                                 <!-- Opción de cerrar sesión -->
                                 <li>
-                                    <a href="../../session_destroy.php">
-                                        <i class="fa fa-sign-out"></i> Cerrar Sesión
-                                    </a>
+                                  <a href="../../session_destroy.php">
+                                    <i class="fa fa-sign-out"></i> Cerrar Sesión
+                                  </a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </div>
+                    <!-- FIN DEL MENÚ MODIFICADO -->
 
                     <!-- Botones footer -->
                     <div class="sidebar-footer hidden-small">

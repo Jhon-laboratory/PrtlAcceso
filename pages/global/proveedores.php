@@ -5,8 +5,8 @@ include('../../control_session.php');
 
 $_SESSION['tipo_usuario'] = isset($_SESSION['tipo_usuario']) ? $_SESSION['tipo_usuario'] : 'usuario';
 
-$dato1 = 5;
-$dato2 = 39;  
+$dato1 = 5;  // Ajusta estos valores según tu menú
+$dato2 = 40; // Nuevo ID para el módulo proveedores  
 $dato3 = 1;
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ $dato3 = 1;
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PORTAL DE ACCESO A TERCEROS - QUITO</title>
+  <title>PORTAL DE ACCESO - PROVEEDORES IESS</title>
   
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -25,13 +25,13 @@ $dato3 = 1;
   <link href="../../build/css/custom.min.css" rel="stylesheet">
 
   <style>
+    /* MANTENER LOS MISMOS ESTILOS QUE proveedorguayaquiil.php */
     body {
         background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
                     url('../../img/imglogin.jpg') center/cover no-repeat fixed;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* CABECERA SUPERIOR MÍNIMA */
     .top_nav {
         background: #2c3e50;
         min-height: 40px !important;
@@ -40,26 +40,6 @@ $dato3 = 1;
         align-items: center;
     }
     
-    .top_nav .nav_menu {
-        min-height: 40px !important;
-        padding: 0 !important;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .nav_menu .navbar-left {
-        display: flex;
-        align-items: center;
-    }
-    
-    .nav_menu .navbar-right {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    /* TÍTULO EN LA CABECERA */
     .nav-title {
         color: #28a745;
         font-size: 14px;
@@ -75,101 +55,20 @@ $dato3 = 1;
         color: #20c997;
     }
     
-    /* ESTILOS ESPECÍFICOS PARA EL NOMBRE DE USUARIO */
-    .nav_menu .navbar-right a.user-profile {
-        color: #28a745 !important;
-        padding: 8px 15px !important;
-        font-size: 14px;
-        text-decoration: none !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        margin: 5px 10px;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(40, 167, 69, 0.3);
-    }
-    
-    .nav_menu .navbar-right a.user-profile:hover {
-        background: rgba(40, 167, 69, 0.15);
-        color: #20c997 !important;
-        border-color: rgba(32, 201, 151, 0.5);
-    }
-    
-    .nav_menu .navbar-right a.user-profile img {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        border-radius: 50%;
-        background: #28a745;
-        padding: 3px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    /* Estilo para el dropdown */
-    .dropdown-usermenu {
-        background: #2c3e50;
-        border: 1px solid #1a252f;
-        border-radius: 8px;
-        margin-top: 5px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-    
-    .dropdown-usermenu a.dropdown-item {
-        color: #e9ecef !important;
-        padding: 10px 15px;
-        font-size: 13px;
-        transition: all 0.2s ease;
-    }
-    
-    .dropdown-usermenu a.dropdown-item:hover {
-        background: #009A3F;
-        color: white !important;
-    }
-    
-    .dropdown-usermenu a.dropdown-item i {
-        color: #28a745;
-    }
-    
-    .dropdown-usermenu a.dropdown-item:hover i {
-        color: white;
-    }
-    
-    .nav_menu .nav.toggle {
-        padding: 8px 10px;
-    }
-    
-    /* CONTENIDO PRINCIPAL - SIN ESPACIOS INNECESARIOS */
     .right_col {
         padding: 5px !important;
         min-height: calc(100vh - 40px) !important;
     }
     
-    /* ELIMINAR ESPACIOS DE X_PANEL */
-    .x_panel {
-        margin: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        background: transparent !important;
-    }
-    
-    .x_title {
-        display: none !important; /* ELIMINADO COMPLETAMENTE */
-    }
-    
-    .x_content {
-        padding: 0 !important;
-    }
-    
-    /* DISEÑO DE TARJETAS - MANTENIENDO EL ESTILO ELEGANTE */
+    /* TARJETAS PROVEEDORES - DISEÑO SIMILAR */
     .cards-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 15px;
         padding: 0 !important;
     }
 
-    .tercero-card {
+    .proveedor-card {
         background: linear-gradient(145deg, #ffffff, #f8f9fa);
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -180,35 +79,33 @@ $dato3 = 1;
         backdrop-filter: blur(10px);
     }
 
-    .tercero-card:hover {
+    .proveedor-card:hover {
         transform: translateY(-5px) scale(1.02);
         box-shadow: 0 12px 25px rgba(0,154,63,0.15);
         border-color: #009A3F;
     }
 
     .card-header {
-        background: linear-gradient(135deg, #009A3F 0%, #00c853 100%);
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); /* Azul para diferenciar */
         color: white;
         padding: 12px 15px 8px;
         position: relative;
         overflow: hidden;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
     }
 
-    .card-header::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-        transform: rotate(45deg);
-        animation: shimmer 3s infinite;
+    .card-header.proveedor-activo {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     }
-
-    @keyframes shimmer {
-        0% { transform: translateX(-100%) rotate(45deg); }
-        100% { transform: translateX(100%) rotate(45deg); }
+    
+    .card-header.proveedor-inactivo {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    }
+    
+    .card-header.proveedor-pendiente {
+        background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
     }
 
     .card-header h5 {
@@ -220,12 +117,14 @@ $dato3 = 1;
         color: white;
         position: relative;
         z-index: 1;
+        line-height: 1.3;
     }
 
     .card-header h5 i {
         margin-right: 8px;
         font-size: 14px;
         color: rgba(255,255,255,0.9);
+        flex-shrink: 0;
     }
 
     .card-body {
@@ -265,7 +164,7 @@ $dato3 = 1;
     .info-label i {
         margin-right: 5px;
         font-size: 11px;
-        color: #009A3F;
+        color: #007bff; /* Azul para diferenciar */
         width: 14px;
         text-align: center;
     }
@@ -277,6 +176,16 @@ $dato3 = 1;
         margin-left: 8px;
         font-weight: 500;
         line-height: 1.3;
+        flex: 1;
+        min-width: 0; /* Permite que el texto se trunque */
+    }
+
+    .info-value .text-truncate {
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .status-badge {
@@ -286,67 +195,69 @@ $dato3 = 1;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        display: inline-block;
     }
 
-    .status-autorizado {
+    .status-activo {
         background: linear-gradient(135deg, #d4edda, #c3e6cb);
         color: #155724;
         border: 1px solid #b1dfbb;
     }
 
-    .status-restringido {
+    .status-inactivo {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        color: #721c24;
+        border: 1px solid #f1b0b7;
+    }
+    
+    .status-pendiente {
+        background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+
+    .status-vigente {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        color: #155724;
+        border: 1px solid #b1dfbb;
+    }
+
+    .status-por-vencer {
+        background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+
+    .status-vencido {
         background: linear-gradient(135deg, #f8d7da, #f5c6cb);
         color: #721c24;
         border: 1px solid #f1b0b7;
     }
 
-    /* OPCIONAL: Cambiar color del borde lateral según estado */
-    .tercero-card.status-autorizado-card::after {
-        background: linear-gradient(180deg, #28a745 0%, #20c997 100%);
-    }
-
-    .tercero-card.status-restringido-card::after {
-        background: linear-gradient(180deg, #dc3545 0%, #e83e8c 100%);
-    }
-
-    /* Botón de antecedentes PEQUEÑO */
-    .btn-antecedentes {
-        background: #F39200;
-        border: none;
-        color: white;
-        font-size: 9px;
-        padding: 2px 6px;
-        border-radius: 6px;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        width: auto;
-        margin: 2px 0;
-    }
-
-    .btn-antecedentes:hover {
-        background: #e68300;
-        transform: scale(1.05);
-    }
-
-    .btn-antecedentes:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    /* Indicador de estado en el borde lateral con gradiente */
-    .tercero-card::after {
+    /* Indicador de estado en el borde lateral */
+    .proveedor-card::after {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 4px;
         height: 100%;
-        background: linear-gradient(180deg, #009A3F 0%, #00c853 100%);
         border-radius: 4px 0 0 4px;
     }
+    
+    .proveedor-card.activo::after {
+        background: linear-gradient(180deg, #28a745 0%, #20c997 100%);
+    }
+    
+    .proveedor-card.inactivo::after {
+        background: linear-gradient(180deg, #dc3545 0%, #c82333 100%);
+    }
+    
+    .proveedor-card.pendiente::after {
+        background: linear-gradient(180deg, #ffc107 0%, #e0a800 100%);
+    }
 
-    /* BUSCADOR SIMPLE - MANTENIENDO EL ESTILO ELEGANTE */
+    /* BUSCADOR */
     .search-container {
         background: linear-gradient(135deg, #ffffff, #f8f9fa);
         padding: 15px;
@@ -371,8 +282,8 @@ $dato3 = 1;
     }
 
     .search-box .form-control:focus {
-        border-color: #009A3F;
-        box-shadow: 0 0 0 3px rgba(0,154,63,0.1);
+        border-color: #007bff; /* Azul para diferenciar */
+        box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
         background: white;
     }
 
@@ -398,20 +309,20 @@ $dato3 = 1;
     }
 
     .load-more-btn {
-        background: linear-gradient(135deg, #009A3F, #00c853);
+        background: linear-gradient(135deg, #007bff, #0056b3);
         border: none;
         border-radius: 25px;
         padding: 8px 25px;
         font-size: 13px;
         font-weight: 600;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0,154,63,0.2);
+        box-shadow: 0 4px 10px rgba(0,123,255,0.2);
     }
 
     .load-more-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0,154,63,0.3);
-        background: linear-gradient(135deg, #008a35, #00b848);
+        box-shadow: 0 6px 15px rgba(0,123,255,0.3);
+        background: linear-gradient(135deg, #0069d9, #004085);
     }
 
     .no-results {
@@ -424,28 +335,10 @@ $dato3 = 1;
         margin: 15px 0;
     }
 
-    .no-results i {
-        font-size: 40px;
-        margin-bottom: 10px;
-        color: #ccc;
-    }
-
     .loading-spinner {
         text-align: center;
         padding: 30px;
-        color: #009A3F;
-    }
-
-    .loading-spinner i {
-        font-size: 40px;
-        margin-bottom: 10px;
-        animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.1); opacity: 0.7; }
-        100% { transform: scale(1); opacity: 1; }
+        color: #007bff;
     }
 
     /* RESPONSIVE */
@@ -455,57 +348,36 @@ $dato3 = 1;
         }
     }
 
-    @media (min-width: 1400px) and (max-width: 1799px) {
-        .cards-container {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    @media (min-width: 1200px) and (max-width: 1399px) {
-        .cards-container {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (min-width: 992px) and (max-width: 1199px) {
-        .cards-container {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (min-width: 768px) and (max-width: 991px) {
-        .cards-container {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
     @media (max-width: 767px) {
         .cards-container {
             grid-template-columns: 1fr;
             gap: 12px;
         }
         
-        .nav-title {
-            display: none; /* Ocultar título en móviles */
-        }
-    }
-
-    @media (max-width: 576px) {
-        .cards-container {
-            grid-template-columns: 1fr;
+        .card-header {
+            min-height: 45px;
         }
         
         .card-header h5 {
             font-size: 12px;
         }
-        
-        .info-item {
-            padding: 5px 0;
-        }
-        
-        .info-label, .info-value {
-            font-size: 10px;
-        }
+    }
+    
+    /* Tooltip personalizado */
+    .card-header h5[title]:hover::after {
+        content: attr(title);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        white-space: nowrap;
+        z-index: 1000;
+        margin-bottom: 5px;
     }
   </style>
 </head>
@@ -514,7 +386,7 @@ $dato3 = 1;
   <div class="container body">
     <div class="main_container">
       
-      <!-- Sidebar de Gentelella -->
+      <!-- Sidebar -->
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
@@ -534,7 +406,7 @@ $dato3 = 1;
 
           <br />
 
-          <!-- REEMPLAZA ESTA SECCIÓN DEL MENÚ -->
+          <!-- REEMPLAZA ESTA SECCIÓN DEL MENÚ CON EL NUEVO DISEÑO -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
@@ -547,7 +419,7 @@ $dato3 = 1;
                     <span class="fa fa-chevron-up"></span>
                   </a>
                   <ul class="nav child_menu" style="display: block;">
-                    <!-- OPCIÓN 1: PAGOS IESS -->
+                    <!-- OPCIÓN 1: PAGOS IESS (ACTIVA EN ESTA PÁGINA) -->
                     <li class="current-page">
                       <a href="proveedores.php">
                         <i class="fa fa-money"></i>
@@ -557,7 +429,7 @@ $dato3 = 1;
                     
                     <!-- OPCIÓN 2: DASHBOARD -->
                     <li>
-                      <a href="proveedorquito.php">
+                      <a href="proveedorguayaquiil.php">
                         <i class="fa fa-dashboard"></i>
                         Dashboard Proveedores
                       </a>
@@ -583,24 +455,10 @@ $dato3 = 1;
           </div>
           <!-- FIN DEL MENÚ MODIFICADO -->
 
-          <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Configuración" onclick="showChangePasswordModal()">
-              <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Pantalla Completa" onclick="toggleFullScreen()">
-              <span class="glyphicon glyphicon-fullscreen"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Recargar" onclick="reloadPage()">
-              <span class="glyphicon glyphicon-refresh"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Cerrar Sesión" href="../../session_destroy.php">
-              <span class="glyphicon glyphicon-off"></span>
-            </a>
-          </div>
         </div>
       </div>
 
-      <!-- CABECERA SUPERIOR MÍNIMA - CORREGIDA CON TÍTULO -->
+      <!-- CABECERA -->
       <div class="top_nav">
         <div class="nav_menu">
           <div class="navbar-left">
@@ -608,7 +466,7 @@ $dato3 = 1;
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <div class="nav-title">
-              <i class="fa fa-building"></i> PORTAL ACCESO - QUITO
+              <i class="fa fa-money"></i> PORTAL - PAGOS IESS
             </div>
           </div>
           
@@ -617,7 +475,7 @@ $dato3 = 1;
               <li class="nav-item dropdown open">
                 <a href="javascript:;" class="user-profile dropdown-toggle"
                   id="navbarDropdown" data-toggle="dropdown">
-                  <div style="display: inline-flex; align-items: center; background: #28a745; width: 26px; height: 26px; border-radius: 50%; justify-content: center; margin-right: 8px;">
+                  <div style="display: inline-flex; align-items: center; background: #007bff; width: 26px; height: 26px; border-radius: 50%; justify-content: center; margin-right: 8px;">
                     <i class="fa fa-user" style="color: white; font-size: 12px;"></i>
                   </div>
                   <?php echo $_SESSION["gb_nombre"]; ?>
@@ -635,18 +493,16 @@ $dato3 = 1;
 
       <!-- CONTENIDO PRINCIPAL -->
       <div class="right_col" role="main">
-        
-        <!-- CONTENIDO PRINCIPAL - SOLO LO ESENCIAL -->
         <div class="row">
           <div class="col-md-12 col-sm-12">
             
-            <!-- BUSCADOR SIMPLE -->
+            <!-- BUSCADOR -->
             <div class="search-container">
               <div class="row">
                 <div class="col-md-8">
                   <div class="search-box">
                     <i class="fa fa-search"></i>
-                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre, cédula...">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar por RUC, razón social...">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -659,7 +515,7 @@ $dato3 = 1;
 
             <!-- CONTENEDOR DE TARJETAS -->
             <div id="cardsContainer" class="cards-container">
-              <!-- Las tarjetas se cargarán aquí via JavaScript -->
+              <!-- Las tarjetas se cargarán aquí -->
             </div>
 
             <!-- BOTÓN CARGAR MÁS -->
@@ -672,21 +528,19 @@ $dato3 = 1;
             <!-- SIN RESULTADOS -->
             <div id="noResults" class="no-results" style="display: none;">
               <i class="fa fa-search"></i>
-              <h5>No se encontraron resultados</h5>
+              <h5>No se encontraron proveedores</h5>
             </div>
 
           </div>
         </div>
-
       </div>
 
       <footer>
         <div class="pull-right" style="font-size: 11px;">
-          PORTAL ACCESO RANSA © <?php echo date('Y') ?>
+          PORTAL PROVEEDORES RANSA © <?php echo date('Y') ?>
         </div>
         <div class="clearfix"></div>
       </footer>
-      
     </div>
   </div>
 
@@ -696,10 +550,7 @@ $dato3 = 1;
   <script src="../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../build/js/custom.min.js"></script>
 
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-
-  <!-- MANTENGO TU JAVASCRIPT EXISTENTE (COMPLETO) -->
-    <!-- JAVASCRIPT ACTUALIZADO PARA INCLUIR FECHA AFECTACIÓN -->
+  <!-- JAVASCRIPT PARA PROVEEDORES -->
   <script>
     // Variables globales
     let allData = [];
@@ -708,244 +559,264 @@ $dato3 = 1;
     const loadMoreCount = 15;
     let isLoading = false;
 
+    // Formatear fecha
     function formatDate(dateString) {
         if (!dateString || 
             dateString === '' || 
             dateString === 'null' ||
             dateString === 'NULL' ||
-            dateString === '0000-00-00' || 
+            dateString === '0000-00-00' ||
             dateString === '0000-00-00 00:00:00') {
             return 'N/A';
         }
+        
+        // Extraer solo la parte de la fecha (YYYY-MM-DD)
+        const datePart = dateString.split(' ')[0];
+        const parts = datePart.split('-');
+        
+        if (parts.length === 3) {
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        
         return dateString;
     }
 
-    function isDocIessActive(docIessValue) {
-        if (!docIessValue) return false;
-        const docIessText = cleanButtonText(docIessValue).toLowerCase().trim();
-        return docIessText === 'activo';
-    }
-
-    function isSeguridadAprobada(seguridadValue) {
-        if (!seguridadValue) return false;
-        const seguridadText = cleanButtonText(seguridadValue).toLowerCase().trim();
-        return seguridadText === 'aprobado' || seguridadText === 'sí' || seguridadText === 'si';
-    }
-
-    function isAntecedentesNo(antecedentesValue) {
-        if (!antecedentesValue) return false;
-        const antecedentesText = cleanButtonText(antecedentesValue).toLowerCase().trim();
-        return antecedentesText === 'no' || antecedentesText === 'no aprobado' || antecedentesText === 'negativo';
-    }
-
-    // NUEVA FUNCIÓN: Validar fecha de afectación
-    function isFechaAfectacionValida(estadoAfectacion) {
-        if (!estadoAfectacion) return false;
-        const estado = estadoAfectacion.toString().toUpperCase().trim();
-        return estado === 'VIGENTE';
-    }
-
-    // FUNCIÓN MODIFICADA: Ahora incluye la fecha de afectación (4 condiciones)
-    function getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion) {
-        const docIessActivo = isDocIessActive(docIessValue);
-        const seguridadAprobada = isSeguridadAprobada(seguridadValue);
-        const antecedentesNo = isAntecedentesNo(antecedentesValue);
-        const afectacionValida = isFechaAfectacionValida(estadoAfectacion);
-        
-        // TODAS las condiciones deben cumplirse para ser AUTORIZADO
-        if (docIessActivo && seguridadAprobada && antecedentesNo && afectacionValida) {
-            return 'AUTORIZADO';
-        } else {
-            return 'RESTRINGIDO';
+    // Calcular estado de vigencia (45 días: 30 antes, 15 después)
+    function calcularEstadoVigencia(fechaVigencia) {
+        if (!fechaVigencia || 
+            fechaVigencia === 'N/A' || 
+            fechaVigencia === '0000-00-00' ||
+            fechaVigencia === '0000-00-00 00:00:00') {
+            return { texto: 'SIN FECHA', clase: 'vencido' };
         }
-    }
-
-    // FUNCIÓN MODIFICADA: Actualizada con nuevo parámetro
-    function getStatusBadgeNew(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion) {
-        const estado = getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion);
         
-        if (estado === 'AUTORIZADO') {
-            return '<span class="status-badge status-autorizado">AUTORIZADO</span>';
-        } else {
-            return '<span class="status-badge status-restringido">RESTRINGIDO</span>';
-        }
-    }
-
-    function cleanButtonText(htmlString) {
-        if (!htmlString) return 'N/A';
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = htmlString;
-        const textContent = tempDiv.textContent || tempDiv.innerText || '';
-        const cedulaMatch = textContent.match(/(\d+)/);
-        return cedulaMatch ? cedulaMatch[1] : textContent.trim();
-    }
-
-    function consultarAntecedentes(cedula, buttonElement) {
-        if (!cedula) return;
-        
-        const originalText = buttonElement.innerHTML;
-        buttonElement.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
-        buttonElement.disabled = true;
-        
-        $.ajax({
-            url: "validar.php",
-            type: "POST",
-            data: { cedula: cedula },
-            success: function(response) {
-                if (response === '1' || response === 1) {
-                    buttonElement.innerHTML = '<i class="fa fa-check" style="color: #28a745;"></i>';
-                    buttonElement.style.background = '#e8f5e8';
-                    buttonElement.style.color = '#28a745';
-                    
-                    setTimeout(() => {
-                        loadRealData($('#searchInput').val());
-                    }, 1000);
-                } else {
-                    buttonElement.innerHTML = '<i class="fa fa-times" style="color: #dc3545;"></i>';
-                    buttonElement.style.background = '#f8d7da';
-                    buttonElement.style.color = '#dc3545';
-                }
-                
-                setTimeout(() => {
-                    buttonElement.innerHTML = originalText;
-                    buttonElement.disabled = false;
-                    buttonElement.style.background = '';
-                    buttonElement.style.color = '';
-                }, 2000);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en consulta:", error);
-                
-                buttonElement.innerHTML = '<i class="fa fa-times" style="color: #dc3545;"></i>';
-                buttonElement.style.background = '#f8d7da';
-                buttonElement.style.color = '#dc3545';
-                
-                setTimeout(() => {
-                    buttonElement.innerHTML = originalText;
-                    buttonElement.disabled = false;
-                    buttonElement.style.background = '';
-                    buttonElement.style.color = '';
-                }, 2000);
+        try {
+            const fechaVig = new Date(fechaVigencia);
+            const hoy = new Date();
+            
+            // Resetear horas para comparar solo fechas
+            fechaVig.setHours(0, 0, 0, 0);
+            hoy.setHours(0, 0, 0, 0);
+            
+            // Diferencia en días
+            const diffTiempo = fechaVig.getTime() - hoy.getTime();
+            const diffDias = Math.ceil(diffTiempo / (1000 * 60 * 60 * 24));
+            
+            if (diffDias < -15) {
+                return { texto: 'VENCIDO', clase: 'vencido' };
+            } else if (diffDias > 30) {
+                return { texto: 'VIGENTE', clase: 'vigente' };
+            } else if (diffDias >= 0) {
+                return { texto: 'POR VENCER', clase: 'por-vencer' };
+            } else {
+                // Entre -1 y -15 días
+                return { texto: 'VENCIDO', clase: 'vencido' };
             }
-        });
+        } catch (error) {
+            console.error('Error calculando vigencia:', error);
+            return { texto: 'ERROR', clase: 'vencido' };
+        }
     }
 
-    function createCard(tercero, index) {
-        const cedula = cleanButtonText(tercero.Cedula);
+    // Formatear período de pago
+    function formatPeriodoPago(periodoPago) {
+        if (!periodoPago || periodoPago === 'N/A' || periodoPago === '') {
+            return { año: 'N/A', mes: 'N/A', mesTexto: 'N/A' };
+        }
         
-        // MODIFICADO: Incluye estado_afectacion
-        const estado = getEstadoGeneral(
-            tercero.DocIess, 
-            tercero.Examen_seguridad, 
-            tercero.Antedentes, 
-            tercero.estado_afectacion  // NUEVO PARÁMETRO
-        );
-        const estadoClass = estado === 'AUTORIZADO' ? 'status-autorizado-card' : 'status-restringido-card';
+        // Si el formato es "1 2025 - 02" o similar
+        const parts = periodoPago.toString().split(/[\s-]+/);
         
-        let fechaDoc = tercero.Fecha_de_documentacion || 
-                      tercero.fecha_documentacion || 
-                      tercero.FechaDocumentacion ||
-                      tercero.Fecha_documento ||
-                      'N/A';
+        // Buscar el año (parte que tiene 4 dígitos)
+        let año = 'N/A';
+        let mesNumero = 'N/A';
+        
+        for (let part of parts) {
+            part = part.trim();
+            
+            // Buscar año (4 dígitos)
+            if (/^\d{4}$/.test(part)) {
+                año = part;
+            }
+            // Buscar mes (1 o 2 dígitos) que no sea el año
+            else if (/^\d{1,2}$/.test(part) && part !== año) {
+                mesNumero = parseInt(part).toString();
+            }
+        }
+        
+        // Si no encontramos mes en el formato esperado, buscar cualquier número de 1-12
+        if (mesNumero === 'N/A') {
+            for (let part of parts) {
+                const num = parseInt(part);
+                if (num >= 1 && num <= 12) {
+                    mesNumero = num.toString();
+                    break;
+                }
+            }
+        }
+        
+        // Convertir número de mes a texto
+        const meses = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+        
+        let mesTexto = 'N/A';
+        if (mesNumero !== 'N/A') {
+            const mesIndex = parseInt(mesNumero) - 1;
+            if (mesIndex >= 0 && mesIndex < 12) {
+                mesTexto = meses[mesIndex];
+            }
+        }
+        
+        return { año, mes: mesNumero, mesTexto };
+    }
+
+    // Determinar clase CSS según estado del proveedor
+    function getEstadoClass(estadoGeneral) {
+        switch(estadoGeneral) {
+            case 'ACTIVO': return 'activo';
+            case 'INACTIVO': return 'inactivo';
+            case 'PENDIENTE': return 'pendiente';
+            default: return 'pendiente';
+        }
+    }
+
+    // Determinar clase header según estado del proveedor
+    function getHeaderClass(estadoGeneral) {
+        switch(estadoGeneral) {
+            case 'ACTIVO': return 'proveedor-activo';
+            case 'INACTIVO': return 'proveedor-inactivo';
+            case 'PENDIENTE': return 'proveedor-pendiente';
+            default: return '';
+        }
+    }
+
+    // Badge de estado del proveedor
+    function getStatusBadge(estadoGeneral) {
+        switch(estadoGeneral) {
+            case 'ACTIVO': 
+                return '<span class="status-badge status-activo">ACTIVO</span>';
+            case 'INACTIVO': 
+                return '<span class="status-badge status-inactivo">INACTIVO</span>';
+            case 'PENDIENTE': 
+                return '<span class="status-badge status-pendiente">PENDIENTE</span>';
+            default: 
+                return '<span class="status-badge status-pendiente">PENDIENTE</span>';
+        }
+    }
+
+    // Crear tarjeta HTML
+    function createCard(proveedor, index) {
+        const estadoClass = getEstadoClass(proveedor.estado_general);
+        const headerClass = getHeaderClass(proveedor.estado_general);
+        
+        // Usar tooltip para mostrar nombre completo
+        const razonSocialTruncada = proveedor.razon_social ? 
+            (proveedor.razon_social.length > 35 ? proveedor.razon_social.substring(0, 35) + '...' : proveedor.razon_social) : 
+            'SIN RAZÓN SOCIAL';
+        
+        const estadoVigencia = calcularEstadoVigencia(proveedor.vigencia);
+        const periodoPago = formatPeriodoPago(proveedor.periodo_pago);
+        const conceptoTruncado = proveedor.concepto ? 
+            (proveedor.concepto.length > 25 ? proveedor.concepto.substring(0, 25) + '...' : proveedor.concepto) : 
+            'N/A';
         
         return `
-            <div class="tercero-card ${estadoClass}" data-index="${index}">
-                <div class="card-header">
-                    <h5>
-                        <i class="fa fa-user-circle"></i>
-                        ${tercero.Nombre || 'N/A'}
+            <div class="proveedor-card ${estadoClass}" data-index="${index}">
+                <div class="card-header ${headerClass}">
+                    <h5 title="${proveedor.razon_social || ''}">
+                        <i class="fa fa-building"></i>
+                        ${razonSocialTruncada}
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="info-item">
                         <span class="info-label">
-                            <i class="fa fa-id-card"></i> Cédula:
+                            <i class="fa fa-id-card"></i> RUC:
                         </span>
-                        <span class="info-value">${cedula || 'N/A'}</span>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 3px 0;">
-                        <button type="button" class="btn btn-antecedentes" 
-                                onclick="consultarAntecedentes('${cedula}', this)"
-                                title="Consultar antecedentes">
-                            <i class="fa fa-search"></i> Antecedentes
-                        </button>
+                        <span class="info-value">${proveedor.ruc || 'N/A'}</span>
                     </div>
                     
                     <div class="info-item">
                         <span class="info-label">
-                            <i class="fa fa-file-text"></i> Doc IESS:
+                            <i class="fa fa-file-text"></i> Concepto:
                         </span>
-                        <span class="info-value">${cleanButtonText(tercero.DocIess) || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">
-                            <i class="fa fa-shield"></i> Seguridad:
-                        </span>
-                        <span class="info-value">${cleanButtonText(tercero.Examen_seguridad) || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">
-                            <i class="fa fa-history"></i> Antecedentes:
-                        </span>
-                        <span class="info-value">${cleanButtonText(tercero.Antedentes) || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">
-                            <i class="fa fa-building"></i> Razón Social:
-                        </span>
-                        <span class="info-value">${tercero.Razon_Social ? (tercero.Razon_Social.length > 20 ? tercero.Razon_Social.substring(0, 20) + '...' : tercero.Razon_Social) : 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">
-                            <i class="fa fa-calendar"></i> Fecha Doc:
-                        </span>
-                        <span class="info-value">${formatDate(fechaDoc)}</span>
+                        <span class="info-value" title="${proveedor.concepto || ''}">${conceptoTruncado}</span>
                     </div>
                     
-                    <!-- NUEVO ITEM: Fecha de Afectación -->
                     <div class="info-item">
                         <span class="info-label">
-                            <i class="fa fa-calendar-check"></i> Fecha de Pago IESS:
+                            <i class="fa fa-calendar-check"></i> Vigencia:
                         </span>
                         <span class="info-value">
-                            ${tercero.fecha_afectacion_raw || 'N/A'}
-                            <br><small style="color: ${tercero.estado_afectacion === 'VIGENTE' ? '#28a745' : '#dc3545'}; font-size: 8px;">
-                                (${tercero.estado_afectacion || 'INVALIDO'})
+                            ${formatDate(proveedor.vigencia)}
+                            <br>
+                            <small>
+                                <span class="status-badge status-${estadoVigencia.clase}">
+                                    ${estadoVigencia.texto}
+                                </span>
                             </small>
                         </span>
                     </div>
                     
                     <div class="info-item">
                         <span class="info-label">
-                            <i class="fa fa-circle"></i> Estado:
+                            <i class="fa fa-calendar-alt"></i> Periodo Pago:
                         </span>
-                        <!-- MODIFICADO: Incluye estado_afectacion -->
-                        <span class="info-value">${getStatusBadgeNew(
-                            tercero.DocIess, 
-                            tercero.Examen_seguridad, 
-                            tercero.Antedentes, 
-                            tercero.estado_afectacion  // NUEVO PARÁMETRO
-                        )}</span>
+                        <span class="info-value">
+                            Año: ${periodoPago.año}
+                            <br><small>Mes: ${periodoPago.mes}</small>
+                        </span>
                     </div>
+                    
                     <div class="info-item">
                         <span class="info-label">
-                            <i class="fa fa-eye"></i> Consultas:
+                            <i class="fa fa-calendar"></i> Mes Pago:
                         </span>
-                        <span class="info-value">${tercero.numconsulta || 0}</span>
+                        <span class="info-value">${periodoPago.mesTexto}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-clock-o"></i> Fecha Registro:
+                        </span>
+                        <span class="info-value">${proveedor.fecha_registro || 'N/A'}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-hashtag"></i> Año:
+                        </span>
+                        <span class="info-value">${proveedor.año_registro || 'N/A'}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-list"></i> Total Registros:
+                        </span>
+                        <span class="info-value">${proveedor.total_registros || 1}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-flag"></i> Estado:
+                        </span>
+                        <span class="info-value">${getStatusBadge(proveedor.estado_general)}</span>
                     </div>
                 </div>
             </div>
         `;
     }
 
+    // Cargar datos reales
     function loadRealData(searchTerm = '', loadMore = false) {
         if (isLoading) return;
         
         isLoading = true;
         
         if (!loadMore) {
-            $('#cardsContainer').html('<div class="loading-spinner"><i class="fa fa-spinner fa-spin"></i><p>Cargando datos...</p></div>');
+            $('#cardsContainer').html('<div class="loading-spinner"><i class="fa fa-spinner fa-spin"></i><p>Cargando proveedores...</p></div>');
             allData = [];
             displayedCount = 0;
         } else {
@@ -953,17 +824,16 @@ $dato3 = 1;
         }
         
         $.ajax({
-            url: "../../Controller/Controller_proveedoruio.php",
+            url: "../../Controller/Controller_proveedores.php",
             type: "POST",
-            data: { "txt_option": '2' },
+            data: { "txt_option": '1' },
             dataType: "json",
             success: function(response) {
                 isLoading = false;
                 
+                console.log("Datos recibidos:", response);
+                
                 if (response && response.data) {
-                    // DEBUG: Verificar si los nuevos campos existen
-                    console.log("Datos Quito recibidos:", response.data[0]);
-                    
                     if (loadMore) {
                         allData = allData.concat(response.data);
                     } else {
@@ -984,7 +854,7 @@ $dato3 = 1;
             },
             error: function(xhr, status, error) {
                 isLoading = false;
-                console.error("Error al cargar datos Quito:", error);
+                console.error("Error al cargar datos:", error);
                 
                 if (!loadMore) {
                     $('#cardsContainer').html('<div class="no-results"><i class="fa fa-exclamation-triangle"></i><h5>Error de conexión</h5></div>');
@@ -997,6 +867,7 @@ $dato3 = 1;
         });
     }
 
+    // Filtrar y mostrar resultados
     function filterAndDisplayResults(searchTerm = '') {
         const container = $('#cardsContainer');
         const resultsCount = $('#resultsCount');
@@ -1012,13 +883,13 @@ $dato3 = 1;
         if (searchTerm) {
             const term = searchTerm.toLowerCase();
             filteredData = allData.filter(item => {
-                const nombre = item.Nombre ? item.Nombre.toLowerCase() : '';
-                const cedula = item.Cedula ? cleanButtonText(item.Cedula).toLowerCase() : '';
-                const razonSocial = item.Razon_Social ? item.Razon_Social.toLowerCase() : '';
+                const ruc = item.ruc ? item.ruc.toLowerCase() : '';
+                const razonSocial = item.razon_social ? item.razon_social.toLowerCase() : '';
+                const concepto = item.concepto ? item.concepto.toLowerCase() : '';
                 
-                return nombre.includes(term) || 
-                       cedula.includes(term) || 
-                       razonSocial.includes(term);
+                return ruc.includes(term) || 
+                       razonSocial.includes(term) || 
+                       concepto.includes(term);
             });
         }
 
@@ -1055,6 +926,7 @@ $dato3 = 1;
         }
     }
 
+    // Realizar búsqueda
     function performSearch(searchTerm = '') {
         if (searchTerm) {
             displayedCount = 0;
@@ -1065,13 +937,16 @@ $dato3 = 1;
         }
     }
 
+    // Document ready
     $(document).ready(function() {
         $('#menu_toggle').on('click', function() {
             $('.left_col').toggleClass('menu-open');
         });
 
+        // Cargar datos iniciales
         loadRealData();
 
+        // Búsqueda en tiempo real
         let searchTimeout;
         $('#searchInput').on('input', function() {
             const searchTerm = $(this).val();
@@ -1082,38 +957,33 @@ $dato3 = 1;
             }, 300);
         });
 
+        // Botón cargar más
         $('#loadMoreBtn').on('click', function() {
             loadRealData('', true);
         });
 
+        // Limpiar búsqueda con ESC
         $('#searchInput').on('keydown', function(e) {
             if (e.key === 'Escape') {
                 $(this).val('');
                 performSearch('');
             }
         });
+
+        // Tooltip para conceptos largos
+        $(document).on('mouseenter', '.info-value[title]', function() {
+            const title = $(this).attr('title');
+            if (title && title !== '') {
+                $(this).tooltip({
+                    title: title,
+                    placement: 'top',
+                    trigger: 'manual'
+                }).tooltip('show');
+            }
+        }).on('mouseleave', '.info-value[title]', function() {
+            $(this).tooltip('dispose');
+        });
     });
-
-    function showChangePasswordModal() {
-      $('#changePasswordModal').modal('show');
-    }
-
-    function toggleFullScreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
-    }
-
-    function reloadPage() {
-      location.reload();
-    }
   </script>
-
-  <script src="../funciones.js"></script>
-
 </body>
 </html>

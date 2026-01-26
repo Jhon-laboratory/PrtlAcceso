@@ -535,21 +535,54 @@ $dato3 = 1;
 
           <br />
 
+          <!-- REEMPLAZA ESTA SECCIÓN DEL MENÚ (líneas 233-243) -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
+                
+                <!-- BOTÓN FIJO "PROVEEDORES" AL INICIO CON DOS OPCIONES -->
+                <li class="active">
+                  <a>
+                    <i class="fa fa-truck"></i>
+                    Proveedores
+                    <span class="fa fa-chevron-up"></span>
+                  </a>
+                  <ul class="nav child_menu" style="display: block;">
+                    <!-- OPCIÓN 1: PAGOS IESS -->
+                    <li class="current-page">
+                      <a href="proveedores.php">
+                        <i class="fa fa-money"></i>
+                        Pagos IESS
+                      </a>
+                    </li>
+                    
+                    <!-- OPCIÓN 2: DASHBOARD -->
+                    <li>
+                      <a href="proveedorguayaquiil.php">
+                        <i class="fa fa-dashboard"></i>
+                        Dashboard Proveedores
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                
+                <!-- MENÚ DINÁMICO DEL SISTEMA (Módulos de BD) -->
                 <?php 
                 include('../menu.php');
                 sistema_menu($dato1, $dato2, $dato3); 
                 ?>
+                
+                <!-- CERRAR SESIÓN -->
                 <li>
                   <a href="../../session_destroy.php">
                     <i class="fa fa-sign-out"></i> Cerrar Sesión
                   </a>
                 </li>
+                
               </ul>
             </div>
           </div>
+          <!-- FIN DEL MENÚ MODIFICADO -->
 
           <div class="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Configuración" onclick="showChangePasswordModal()">
@@ -645,7 +678,6 @@ $dato3 = 1;
 
           </div>
         </div>
-
       </div>
 
       <footer>
@@ -654,7 +686,6 @@ $dato3 = 1;
         </div>
         <div class="clearfix"></div>
       </footer>
-      
     </div>
   </div>
 
@@ -666,7 +697,7 @@ $dato3 = 1;
 
   <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 
-  <!-- MANTENGO TU JAVASCRIPT EXISTENTE (COMPLETO) -->
+  <!-- JAVASCRIPT COMPLETO CON DEBUG MEJORADO -->
   <script>
     // Variables globales
     let allData = [];
@@ -705,20 +736,31 @@ $dato3 = 1;
         return antecedentesText === 'no' || antecedentesText === 'no aprobado' || antecedentesText === 'negativo';
     }
 
-    function getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue) {
+    // Validar fecha de afectación (ahora periodo)
+    function isFechaAfectacionValida(estadoAfectacion) {
+        if (!estadoAfectacion) return false;
+        const estado = estadoAfectacion.toString().toUpperCase().trim();
+        return estado === 'VIGENTE';
+    }
+
+    // FUNCIÓN MODIFICADA: Ahora incluye la fecha de afectación
+    function getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion) {
         const docIessActivo = isDocIessActive(docIessValue);
         const seguridadAprobada = isSeguridadAprobada(seguridadValue);
         const antecedentesNo = isAntecedentesNo(antecedentesValue);
+        const afectacionValida = isFechaAfectacionValida(estadoAfectacion);
         
-        if (docIessActivo && seguridadAprobada && antecedentesNo) {
+        // TODAS las condiciones deben cumplirse para ser AUTORIZADO
+        if (docIessActivo && seguridadAprobada && antecedentesNo && afectacionValida) {
             return 'AUTORIZADO';
         } else {
             return 'RESTRINGIDO';
         }
     }
 
-    function getStatusBadgeNew(docIessValue, seguridadValue, antecedentesValue) {
-        const estado = getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue);
+    // FUNCIÓN MODIFICADA: Actualizada con nuevo parámetro
+    function getStatusBadgeNew(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion) {
+        const estado = getEstadoGeneral(docIessValue, seguridadValue, antecedentesValue, estadoAfectacion);
         
         if (estado === 'AUTORIZADO') {
             return '<span class="status-badge status-autorizado">AUTORIZADO</span>';
@@ -727,6 +769,7 @@ $dato3 = 1;
         }
     }
 
+    // FUNCIÓN ORIGINAL PARA TODOS LOS CAMPOS (NO MODIFICAR)
     function cleanButtonText(htmlString) {
         if (!htmlString) return 'N/A';
         const tempDiv = document.createElement('div');
@@ -734,6 +777,22 @@ $dato3 = 1;
         const textContent = tempDiv.textContent || tempDiv.innerText || '';
         const cedulaMatch = textContent.match(/(\d+)/);
         return cedulaMatch ? cedulaMatch[1] : textContent.trim();
+    }
+
+    // NUEVA FUNCIÓN ESPECIAL SOLO PARA DOC IESS
+    function formatDocIess(docIessValue) {
+        if (!docIessValue) return 'No';
+        
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = docIessValue;
+        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+        
+        // Si contiene "Activo" (sin importar mayúsculas/minúsculas), mostrar "Sí"
+        if (textContent.toLowerCase().includes('activo')) {
+            return 'Sí';
+        } else {
+            return 'No'; // Para cualquier otro caso (inactivo, vacío, etc.)
+        }
     }
 
     function consultarAntecedentes(cedula, buttonElement) {
@@ -789,7 +848,13 @@ $dato3 = 1;
     function createCard(tercero, index) {
         const cedula = cleanButtonText(tercero.Cedula);
         
-        const estado = getEstadoGeneral(tercero.DocIess, tercero.Examen_seguridad, tercero.Antedentes);
+        // MODIFICADO: Incluye estado_afectacion
+        const estado = getEstadoGeneral(
+            tercero.DocIess, 
+            tercero.Examen_seguridad, 
+            tercero.Antedentes, 
+            tercero.estado_afectacion
+        );
         const estadoClass = estado === 'AUTORIZADO' ? 'status-autorizado-card' : 'status-restringido-card';
         
         let fechaDoc = tercero.Fecha_de_documentacion || 
@@ -797,6 +862,15 @@ $dato3 = 1;
                       tercero.FechaDocumentacion ||
                       tercero.Fecha_documento ||
                       'N/A';
+        
+        // DEBUG: Verificar qué datos tenemos realmente
+        console.log(`DEBUG createCard - Registro ${index}:`, {
+            cedula: tercero.Cedula,
+            periodo_raw: tercero.periodo_raw,
+            estado_afectacion: tercero.estado_afectacion,
+            tiene_periodo_raw: 'periodo_raw' in tercero,
+            todos_campos: Object.keys(tercero)
+        });
         
         return `
             <div class="tercero-card ${estadoClass}" data-index="${index}">
@@ -826,7 +900,8 @@ $dato3 = 1;
                         <span class="info-label">
                             <i class="fa fa-file-text"></i> Doc IESS:
                         </span>
-                        <span class="info-value">${cleanButtonText(tercero.DocIess) || 'N/A'}</span>
+                        <!-- MODIFICADO: Usa formatDocIess en lugar de cleanButtonText -->
+                        <span class="info-value">${formatDocIess(tercero.DocIess) || 'N/A'}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">
@@ -852,11 +927,31 @@ $dato3 = 1;
                         </span>
                         <span class="info-value">${formatDate(fechaDoc)}</span>
                     </div>
+                    
+                    <!-- SOLO CAMBIO AQUÍ: "Fecha de Afectación" por "Periodo" -->
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-calendar-check"></i> Periodo:
+                        </span>
+                        <span class="info-value">
+                            ${tercero.periodo_raw ? tercero.periodo_raw : 'N/A'}
+                            <br><small style="color: ${tercero.estado_afectacion === 'VIGENTE' ? '#28a745' : (tercero.estado_afectacion === 'INVALIDO' ? '#dc3545' : '#ffc107')}; font-size: 8px;">
+                                (${tercero.estado_afectacion || 'INVALIDO'})
+                            </small>
+                        </span>
+                    </div>
+                    
                     <div class="info-item">
                         <span class="info-label">
                             <i class="fa fa-circle"></i> Estado:
                         </span>
-                        <span class="info-value">${getStatusBadgeNew(tercero.DocIess, tercero.Examen_seguridad, tercero.Antedentes)}</span>
+                        <!-- MODIFICADO: Incluye estado_afectacion -->
+                        <span class="info-value">${getStatusBadgeNew(
+                            tercero.DocIess, 
+                            tercero.Examen_seguridad, 
+                            tercero.Antedentes, 
+                            tercero.estado_afectacion
+                        )}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">
@@ -890,6 +985,52 @@ $dato3 = 1;
             success: function(response) {
                 isLoading = false;
                 
+                // DEBUG MEJORADO: VER QUÉ DATOS ESTAMOS RECIBIENDO
+                console.log("=== DEBUG DETALLADO - DATOS RECIBIDOS ===");
+                console.log("Tipo de respuesta:", typeof response);
+                console.log("Respuesta completa:", response);
+                
+                if (response) {
+                    console.log("Response tiene data?:", 'data' in response);
+                    console.log("Response tiene totalfila?:", 'totalfila' in response);
+                    
+                    if (response.data && response.data.length > 0) {
+                        console.log("Cantidad de registros:", response.data.length);
+                        console.log("Primer registro completo:", response.data[0]);
+                        
+                        // Verificar todos los campos del primer registro
+                        const primerRegistro = response.data[0];
+                        console.log("=== CAMPOS DEL PRIMER REGISTRO ===");
+                        Object.keys(primerRegistro).forEach(key => {
+                            console.log(`Campo: "${key}" = "${primerRegistro[key]}"`);
+                        });
+                        
+                        // Buscar específicamente campos relacionados con periodo
+                        const camposPeriodo = Object.keys(primerRegistro).filter(key => 
+                            key.toLowerCase().includes('periodo') || 
+                            key.toLowerCase().includes('afectacion') ||
+                            key.toLowerCase().includes('fecha')
+                        );
+                        
+                        console.log("Campos relacionados con periodo:", camposPeriodo);
+                        if (camposPeriodo.length > 0) {
+                            camposPeriodo.forEach(campo => {
+                                console.log(`  ${campo}: ${primerRegistro[campo]}`);
+                            });
+                        }
+                        
+                        // Mostrar información de la cédula y periodo para debug
+                        console.log("Cedula en datos:", primerRegistro.Cedula);
+                        console.log("periodo_raw en datos:", primerRegistro.periodo_raw);
+                        console.log("estado_afectacion en datos:", primerRegistro.estado_afectacion);
+                    } else {
+                        console.log("No hay datos en response.data o está vacío");
+                    }
+                } else {
+                    console.log("Response es null o undefined");
+                }
+                console.log("=== FIN DEBUG DETALLADO ===");
+                
                 if (response && response.data) {
                     if (loadMore) {
                         allData = allData.concat(response.data);
@@ -912,6 +1053,8 @@ $dato3 = 1;
             error: function(xhr, status, error) {
                 isLoading = false;
                 console.error("Error al cargar datos:", error);
+                console.error("Status:", status);
+                console.error("XHR:", xhr);
                 
                 if (!loadMore) {
                     $('#cardsContainer').html('<div class="no-results"><i class="fa fa-exclamation-triangle"></i><h5>Error de conexión</h5></div>');
